@@ -1,9 +1,13 @@
-import optparse
+import argparse
 import json
 import urlparse
 import urllib
 import urllib2
 from pprint import pprint
+
+"""
+API wiki: http://central.isaroach.com/wiki/index.php/Main_Page
+"""
 
 thermostat = 'http://10.0.11.20'
 
@@ -21,10 +25,10 @@ def request(path, **params):
 	return res
 
 def simple_request():
-	parser = optparse.OptionParser()
-	options, args = parser.parse_args()
-	path = args.pop(0)
-	pprint(request(path))
+	parser = argparse.ArgumentParser()
+	parser.add_argument('command')
+	args = parser.parse_args()
+	pprint(request(args.command))
 
 def reboot():
 	# from http://thermostat/update.shtml
