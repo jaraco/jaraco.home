@@ -9,7 +9,7 @@ from pprint import pprint
 API wiki: http://central.isaroach.com/wiki/index.php/Main_Page
 """
 
-thermostat = 'http://10.0.11.20'
+thermostat = 'http://192.168.14.20'
 
 def request(path, **params):
 	"""
