@@ -43,7 +43,6 @@ class RadioThermostat:
 	def __init__(self, username, password):
 		self.username = username
 		self.password = password
-		self.login()
 
 	def api(self, path):
 		return urllib.parse.urljoin(self.root, path)
