@@ -1,9 +1,9 @@
+import setuptools
 
-from setuptools import setup, find_packages
 setup_params = dict(
 	name='jaraco.home',
 	use_hg_version={'increment':'0.1'},
-	packages=find_packages(),
+	packages=setuptools.find_packages(),
 	namespace_packages=['jaraco'],
 	install_requires=[
 		'requests',
@@ -15,4 +15,4 @@ setup_params = dict(
 )
 
 if __name__ == '__main__':
-	setup(**setup_params)
+	setuptools.setup(**setup_params)
