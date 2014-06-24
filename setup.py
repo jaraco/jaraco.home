@@ -11,9 +11,14 @@ setup_params = dict(
 			'thermostat=jaraco.home.thermostat:simple_request',
 			]
 		),
+	install_requires=[
+		'requests',
+		'lxml',
+	],
 	setup_requires=[
 		'hgtools',
 	],
 )
+
 if __name__ == '__main__':
 	setup(**setup_params)
