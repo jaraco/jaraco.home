@@ -1,5 +1,4 @@
 import argparse
-import json
 from pprint import pprint
 
 from six.moves import urllib
@@ -19,11 +18,8 @@ def request(path, **params):
 	/sys/network
 	/tstat/info
 	"""
-	data = urllib.urlencode(params) if params else None
 	url = urllib.parse.urljoin(thermostat, path)
-	req = urllib.request.urlopen(url, data)
-	res = json.load(req)
-	return res
+	return requests.get(url, data=params).json()
 
 def simple_request():
 	parser = argparse.ArgumentParser()
