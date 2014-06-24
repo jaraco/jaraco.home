@@ -1,8 +1,6 @@
 import argparse
 import json
-import urlparse
-import urllib
-import urllib2
+from six.moves import urllib
 from pprint import pprint
 
 """
@@ -19,8 +17,8 @@ def request(path, **params):
 	/tstat/info
 	"""
 	data = urllib.urlencode(params) if params else None
-	url = urlparse.urljoin(thermostat, path)
-	req = urllib2.urlopen(url, data)
+	url = urllib.parse.urljoin(thermostat, path)
+	req = urllib.request.urlopen(url, data)
 	res = json.load(req)
 	return res
 
