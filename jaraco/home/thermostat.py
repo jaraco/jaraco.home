@@ -58,10 +58,10 @@ class RadioThermostat:
 	def submit(cls, form):
 		return lxml.html.submit_form(form, open_http=cls.open_for_lxml)
 
-	def login(self):
-		resp = self.session.get(self.root)
+	def login(self, url=None):
+		resp = self.session.get(url or self.root)
 		if 'login' not in resp.url:
-			return
+			return resp
 		page = lxml.html.fromstring(resp.text, base_url=resp.url)
 		form = page.forms[0]
 		form.fields['j_username'] = self.username
@@ -69,9 +69,16 @@ class RadioThermostat:
 		resp = self.submit(form)
 		assert 'login' not in resp.url, "Login failed"
 
+	def _request(self, path):
+		"""
+		Request the path, but trap login failure.
+		"""
+		url = self.api(path)
+		return self.login(url) or self.session.get(url)
+
 	def get_locations(self):
 		self.login()
-		return map(Location, self.session.get(self.api('locations')).json())
+		return map(Location, self._request('locations').json())
 
 	def get_first_temp(self):
 		"""
@@ -79,8 +86,8 @@ class RadioThermostat:
 		account.
 		"""
 		loc = next(iter(self.get_locations()))
-		url = self.api('gateways?location={id}'.format(**loc))
-		resp = self.session.get(url)
+		path = 'gateways?location={id}'.format(**loc)
+		resp = self._request(path)
 		return resp.json()[0]['settings']['temp']
 
 class Location(dict):
