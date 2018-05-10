@@ -17,6 +17,7 @@ API wiki: http://central.isaroach.com/wiki/index.php/Main_Page
 
 thermostat = 'http://192.168.14.20'
 
+
 def request(path, **params):
 	"""
 	Path is something like
@@ -27,11 +28,13 @@ def request(path, **params):
 	url = urllib.parse.urljoin(thermostat, path)
 	return requests.get(url, data=params).json()
 
+
 def simple_request():
 	parser = argparse.ArgumentParser()
 	parser.add_argument('command')
 	args = parser.parse_args()
 	pprint(request(args.command))
+
 
 def reboot():
 	# from http://thermostat/update.shtml
@@ -95,6 +98,7 @@ class RadioThermostat:
 		path = 'gateways?location={id}'.format(**loc)
 		resp = self._request(path)
 		return resp.json()[0]['settings']['temp']
+
 
 class Location(dict):
 	def get_link(self, name):

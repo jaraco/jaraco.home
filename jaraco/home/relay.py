@@ -1,3 +1,4 @@
+import traceback
 import json
 
 import cherrypy
@@ -7,6 +8,7 @@ from . import thermostat
 """
 A relay for publically-exposed interfaces.
 """
+
 
 class Site:
 	@cherrypy.expose
@@ -32,10 +34,12 @@ class Site:
 		try:
 			import isapi_wsgi
 			return isapi_wsgi.ISAPISimpleHandler(cls.setup_application('/home'))
-		except:
+		except Exception:
 			traceback.print_exc()
 
+
 __ExtensionFactory__ = Site.factory
+
 
 def handle_isapi():
 	"Install or remove the extension to the virtual directory"
@@ -51,9 +55,9 @@ def handle_isapi():
 	vd = isapi.install.VirtualDirParameters(
 		Server="Default Web Site",
 		Name="/home",
-		Description = "Media Index",
-		ScriptMaps = sm,
-		ScriptMapUpdate = "end",
-		)
+		Description="Media Index",
+		ScriptMaps=sm,
+		ScriptMapUpdate="end",
+	)
 	params.VirtualDirs = [vd]
 	isapi.install.HandleCommandLine(params)
