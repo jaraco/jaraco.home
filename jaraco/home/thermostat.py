@@ -5,9 +5,9 @@ True
 """
 
 import argparse
+import urllib.parse
 from pprint import pprint
 
-from six.moves import urllib
 import requests
 import lxml.html
 
