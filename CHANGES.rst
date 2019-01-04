@@ -1,3 +1,8 @@
+3.0.1
+=====
+
+Require later lxml to avoid DeprecationWarning.
+
 3.0
 ===
 
