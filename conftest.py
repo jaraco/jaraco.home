@@ -1,3 +1,3 @@
 collect_ignore = [
-	'jaraco/home/relay.py',
+    'jaraco/home/relay.py',
 ]
