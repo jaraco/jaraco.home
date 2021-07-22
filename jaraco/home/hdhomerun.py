@@ -1,8 +1,11 @@
+import os
 import functools
 import contextlib
 import time
 import subprocess
+
 from jaraco.functools import retry
+from jaraco.mongodb.helper import connect_db
 
 
 def parse_field(item):
@@ -54,8 +57,8 @@ def gather_status():
 
 
 def run():
-    for status in gather_status():
-        print(status)
+    db = connect_db(os.environ['MONGODB_URL'])
+    db.statuses.insert_many(gather_status())
 
 
 __name__ == '__main__' and run()
