@@ -3,7 +3,11 @@ import functools
 import contextlib
 import time
 import subprocess
+import sys
+import pathlib
+from importlib.resources import files
 
+import keyring
 from jaraco.functools import retry
 from jaraco.mongodb.helper import connect_db
 
@@ -60,9 +64,33 @@ def gather_status():
     set_channel(tuner, None)
 
 
+def install():
+    name = 'Gather HDHomeRun Stats.plist'
+    agents = pathlib.Path('~/Library/LaunchAgents').expanduser()
+    target = agents / name
+    tmpl_name = files(__package__) / name
+    tmpl = tmpl_name.read_text()
+    source = tmpl.format(sys=sys)
+    target.write_text(source)
+
+
+def inject_creds(url):
+    username = 'jaraco'
+    password = keyring.get_password(url, username)
+    assert password, "No password found"
+    return url.replace('://', f'://{username}:{password}@')
+
+
 def run():
-    db = connect_db(os.environ['MONGODB_URL'])
+    url = 'mongodb+srv://cluster0.x8wjx.mongodb.net/hdhomerun'
+    db = connect_db(inject_creds(url))
     db.statuses.insert_many(gather_status())
 
 
-__name__ == '__main__' and run()
+def main():
+    if 'install' in sys.argv:
+        return install()
+    return run()
+
+
+__name__ == '__main__' and main()
