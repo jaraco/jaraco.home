@@ -57,6 +57,7 @@ def find_idle_tuner():
 
 def gather_status():
     tuner = find_idle_tuner()
+    assert tuner is not None
 
     for channel in 34, 35, 36:
         set_channel(tuner, channel)
