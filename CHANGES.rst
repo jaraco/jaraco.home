@@ -1,3 +1,8 @@
+v3.1.1
+=====
+
+Bugfixes in hdhomerun.
+
 v3.1.0
 =====
 

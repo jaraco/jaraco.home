@@ -53,11 +53,11 @@ def find_idle_tuner():
         status = get_status(id)
         if not status['ch']:
             return id
+    raise RuntimeError("Could not find idle tuner")
 
 
 def gather_status():
     tuner = find_idle_tuner()
-    assert tuner is not None
 
     for channel in 34, 35, 36:
         set_channel(tuner, channel)
