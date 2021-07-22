@@ -16,11 +16,11 @@
 	<key>StartInterval</key>
 	<integer>3600</integer>
 	<key>SessionCreate</key>
-	<true/>
+	<false/>
 	<key>StandardErrorPath</key>
-	<string>/tmp/hdhomerun.err</string>
+	<string>{logs}/hdhomerun.err</string>
 	<key>StandardOutPath</key>
-	<string>/tmp/hdhomerun.out</string>
+	<string>{logs}/hdhomerun.out</string>
 </dict>
 
 </plist>

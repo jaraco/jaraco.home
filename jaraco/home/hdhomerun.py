@@ -70,8 +70,10 @@ def install():
     target = agents / name
     tmpl_name = files(__package__) / name
     tmpl = tmpl_name.read_text()
-    source = tmpl.format(sys=sys)
+    logs = pathlib.Path(sys.executable).parent.parent / 'logs'
+    source = tmpl.format(sys=sys, logs=logs)
     target.write_text(source)
+    subprocess.check_output(['launchctl', 'load', target])
 
 
 def inject_creds(url):
@@ -84,6 +86,8 @@ def inject_creds(url):
 def run():
     url = 'mongodb+srv://cluster0.x8wjx.mongodb.net/hdhomerun'
     db = connect_db(inject_creds(url))
+    with contextlib.suppress(Exception):
+        db.create_collection('statuses', capped=True, size=102400)
     db.statuses.insert_many(gather_status())
 
 
