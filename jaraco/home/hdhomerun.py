@@ -28,14 +28,14 @@ def parse_status(line):
 sleep_2 = functools.partial(time.sleep, 2)
 
 
-@retry(retries=2, cleanup=sleep_2, trap=Exception)
+@retry(retries=5, cleanup=sleep_2, trap=Exception)
 def get_status(tuner_id):
     cmd = ['hdhomerun_config', 'FFFFFFFF', 'get', f'/tuner{tuner_id}/status']
     line = subprocess.check_output(cmd, text=True)
     return parse_status(line)
 
 
-@retry(retries=2, cleanup=sleep_2, trap=Exception)
+@retry(retries=5, cleanup=sleep_2, trap=Exception)
 def set_channel(tuner_id, channel):
     channel_str = str(channel) if channel else 'none'
     cmd = [
