@@ -18,7 +18,7 @@ def parse_field(item):
         value = int(value)
     if value == 'none':
         value = None
-    return value
+    return key, value
 
 
 def parse_status(line):
