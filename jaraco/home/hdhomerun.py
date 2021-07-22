@@ -35,6 +35,7 @@ def get_status(tuner_id):
     return parse_status(line)
 
 
+@retry(retries=2, cleanup=sleep_2, trap=Exception)
 def set_channel(tuner_id, channel):
     channel_str = str(channel) if channel else 'none'
     cmd = [
@@ -44,8 +45,7 @@ def set_channel(tuner_id, channel):
         f'/tuner{tuner_id}/channel',
         channel_str,
     ]
-    line = subprocess.check_output(cmd, text=True)
-    return parse_status(line)
+    subprocess.check_call(cmd)
 
 
 def find_idle_tuner():
