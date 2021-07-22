@@ -1,3 +1,8 @@
+v3.1.0
+=====
+
+Add hdhomerun module.
+
 v3.0.2
 =====
 
