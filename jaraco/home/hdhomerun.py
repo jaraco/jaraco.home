@@ -34,8 +34,12 @@ def get_status(tuner_id):
 def set_channel(tuner_id, channel):
     channel_str = str(channel) if channel else 'none'
     cmd = [
-        'hdhomerun_config', 'FFFFFFFF', 'set',
-        f'/tuner{tuner_id}/channel', channel_str]
+        'hdhomerun_config',
+        'FFFFFFFF',
+        'set',
+        f'/tuner{tuner_id}/channel',
+        channel_str,
+    ]
     line = subprocess.check_output(cmd)
     return parse_status(line)
 
