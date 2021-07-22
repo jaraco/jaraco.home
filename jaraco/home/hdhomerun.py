@@ -31,7 +31,7 @@ sleep_2 = functools.partial(time.sleep, 2)
 @retry(retries=2, cleanup=sleep_2, trap=Exception)
 def get_status(tuner_id):
     cmd = ['hdhomerun_config', 'FFFFFFFF', 'get', f'/tuner{tuner_id}/status']
-    line = subprocess.check_output(cmd)
+    line = subprocess.check_output(cmd, text=True)
     return parse_status(line)
 
 
@@ -44,7 +44,7 @@ def set_channel(tuner_id, channel):
         f'/tuner{tuner_id}/channel',
         channel_str,
     ]
-    line = subprocess.check_output(cmd)
+    line = subprocess.check_output(cmd, text=True)
     return parse_status(line)
 
 
