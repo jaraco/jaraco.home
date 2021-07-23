@@ -1,3 +1,8 @@
+v3.1.2
+=====
+
+Use absolute path for hdhomerun_config, else it fails in LaunchAgent.
+
 v3.1.1
 =====
 
