@@ -1,3 +1,8 @@
+v3.3.0
+======
+
+Idle tuners are now detected in random order.
+
 v3.2.0
 ======
 

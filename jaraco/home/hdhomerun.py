@@ -4,6 +4,7 @@ import time
 import subprocess
 import sys
 import pathlib
+import random
 from importlib.resources import files
 
 import keyring
@@ -50,8 +51,15 @@ def set_channel(tuner_id, channel):
     subprocess.check_call(cmd)
 
 
+def shuffled(items):
+    ordered = list(items)
+    random.shuffle(ordered)
+    return ordered
+
+
 def find_idle_tuner():
-    for id in range(4):
+    candidates = shuffled(range(4))
+    for id in candidates:
         status = get_status(id)
         if not status['ch']:
             return id
