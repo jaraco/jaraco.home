@@ -1,3 +1,8 @@
+v3.2.0
+=====
+
+HDHomeRun routine can now automatically update the package.
+
 v3.1.2
 =====
 

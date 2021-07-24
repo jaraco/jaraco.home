@@ -12,6 +12,7 @@
 		<string>{sys.executable}</string>
 		<string>-m</string>
 		<string>jaraco.home.hdhomerun</string>
+		<string>--update</string>
 	</array>
 	<key>StartInterval</key>
 	<integer>3600</integer>

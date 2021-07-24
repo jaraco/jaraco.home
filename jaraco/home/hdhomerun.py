@@ -1,4 +1,3 @@
-import os
 import functools
 import contextlib
 import time
@@ -95,10 +94,27 @@ def run():
     db.statuses.insert_many(gather_status())
 
 
+def update():
+    cmd = [
+        sys.executable,
+        '-m',
+        'pip',
+        'install',
+        '--quiet',
+        '--upgrade',
+        '--upgrade-strategy',
+        'eager',
+        'jaraco.home',
+    ]
+    subprocess.run(cmd)
+
+
 def main():
     if 'install' in sys.argv:
         return install()
-    return run()
+    run()
+    if '--update' in sys.argv:
+        update()
 
 
 __name__ == '__main__' and main()
