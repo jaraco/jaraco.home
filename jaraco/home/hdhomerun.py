@@ -94,12 +94,17 @@ def inject_creds(url):
     return url.replace('://', f'://{username}:{password}@')
 
 
-def run():
+@functools.lru_cache
+def get_db():
     url = 'mongodb+srv://cluster0.x8wjx.mongodb.net/hdhomerun'
     db = connect_db(inject_creds(url))
     with contextlib.suppress(Exception):
         db.create_collection('statuses', capped=True, size=102400)
-    db.statuses.insert_many(gather_status())
+    return db
+
+
+def run():
+    get_db().statuses.insert_many(gather_status())
 
 
 def update():
