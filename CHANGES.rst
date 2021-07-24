@@ -1,3 +1,8 @@
+v3.3.1
+======
+
+Fix bug in gather_status.
+
 v3.3.0
 ======
 

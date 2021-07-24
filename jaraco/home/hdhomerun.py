@@ -34,6 +34,10 @@ hdhomerun_config = '/usr/local/bin/hdhomerun_config'
 
 @retry(retries=5, cleanup=sleep_2, trap=Exception)
 def get_status(tuner_id):
+    """
+    >>> get_status(0)
+    {'ch': None, 'ss': 80}
+    """
     cmd = [hdhomerun_config, 'FFFFFFFF', 'get', f'/tuner{tuner_id}/status']
     line = subprocess.check_output(cmd, text=True)
     return parse_status(line)
@@ -67,11 +71,18 @@ def find_idle_tuner():
 
 
 def gather_status():
+    """
+    >>> status = next(gather_status())
+    >>> len(status)
+    3
+    >>> 0 <= status['tuner'] < 4
+    True
+    """
     tuner = find_idle_tuner()
 
     for channel in 34, 35, 36:
         set_channel(tuner, channel)
-        yield DictStack(get_status(tuner), dict(tuner=tuner))
+        yield dict(DictStack([get_status(tuner), dict(tuner=tuner)]))
     set_channel(tuner, None)
 
 
