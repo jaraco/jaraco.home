@@ -14,6 +14,8 @@ v3.2.0
 
 HDHomeRun routine can now automatically update the package.
 
+Require Python 3.9 or later.
+
 v3.1.2
 ======
 
