@@ -59,8 +59,7 @@ def shuffled(items):
 
 
 def find_idle_tuner():
-    candidates = shuffled(range(4))
-    for id in candidates:
+    for id in shuffled(range(4)):
         status = get_status(id)
         if not status['ch']:
             return id
