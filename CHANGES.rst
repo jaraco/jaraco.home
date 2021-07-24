@@ -1,25 +1,25 @@
 v3.2.0
-=====
+======
 
 HDHomeRun routine can now automatically update the package.
 
 v3.1.2
-=====
+======
 
 Use absolute path for hdhomerun_config, else it fails in LaunchAgent.
 
 v3.1.1
-=====
+======
 
 Bugfixes in hdhomerun.
 
 v3.1.0
-=====
+======
 
 Add hdhomerun module.
 
 v3.0.2
-=====
+======
 
 Switch to PEP 420 for namespace packages.
 
