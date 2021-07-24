@@ -1,7 +1,8 @@
 v3.3.0
 ======
 
-Idle tuners are now detected in random order.
+- Idle tuners are now detected in random order.
+- Tuner ID is now included in the status.
 
 v3.2.0
 ======

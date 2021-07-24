@@ -10,6 +10,7 @@ from importlib.resources import files
 import keyring
 from jaraco.functools import retry
 from jaraco.mongodb.helper import connect_db
+from jaraco.collections import DictStack
 
 
 def parse_field(item):
@@ -71,7 +72,7 @@ def gather_status():
 
     for channel in 34, 35, 36:
         set_channel(tuner, channel)
-        yield get_status(tuner)
+        yield DictStack(get_status(tuner), dict(tuner=tuner))
     set_channel(tuner, None)
 
 
