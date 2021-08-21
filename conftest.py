@@ -1,4 +1,5 @@
 import platform
+from importlib.resources import files
 
 import pytest
 from mockproc import mockprocess
@@ -20,6 +21,7 @@ def hdhomerun_config_mocked():
 
     hd.hdhomerun_config = 'hdhomerun_config'
     scripts = mockprocess.MockProc()
-    scripts.append('hdhomerun_config', returncode=0, stdout="ch=none ss=80\n")
+    script = files('jaraco.home').joinpath('mock hdhomerun.py').read_text()
+    scripts.append('hdhomerun_config', returncode=0, script=script)
     with scripts:
         yield

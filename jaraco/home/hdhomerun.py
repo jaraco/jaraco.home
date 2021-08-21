@@ -5,6 +5,7 @@ import subprocess
 import sys
 import pathlib
 import random
+import re
 from importlib.resources import files
 
 import keyring
@@ -32,23 +33,36 @@ sleep_2 = functools.partial(time.sleep, 2)
 hdhomerun_config = '/usr/local/bin/hdhomerun_config'
 
 
+def parse_devices(res):
+    r"""
+    >>> list(parse_devices("hdhomerun device 1072F92A found at 192.168.0.2\n"*2))
+    ['1072F92A', '1072F92A']
+    """
+    return (match.group(1) for match in re.finditer(r'device (\w+)', res))
+
+
+def discover():
+    cmd = [hdhomerun_config, 'discover']
+    return parse_devices(subprocess.check_output(cmd, text=True))
+
+
 @retry(retries=5, cleanup=sleep_2, trap=Exception)
-def get_status(tuner_id):
+def get_status(tuner_id, device_id='FFFFFFFF'):
     """
     >>> get_status(0)
     {'ch': None, 'ss': 80}
     """
-    cmd = [hdhomerun_config, 'FFFFFFFF', 'get', f'/tuner{tuner_id}/status']
+    cmd = [hdhomerun_config, device_id, 'get', f'/tuner{tuner_id}/status']
     line = subprocess.check_output(cmd, text=True)
     return parse_status(line)
 
 
 @retry(retries=5, cleanup=sleep_2, trap=Exception)
-def set_channel(tuner_id, channel):
+def set_channel(tuner_id, channel, device_id='FFFFFFFF'):
     channel_str = str(channel) if channel else 'none'
     cmd = [
         hdhomerun_config,
-        'FFFFFFFF',
+        device_id,
         'set',
         f'/tuner{tuner_id}/channel',
         channel_str,
@@ -70,19 +84,27 @@ def find_idle_tuner():
     raise RuntimeError("Could not find idle tuner")
 
 
+def _combine(*dicts):
+    return dict(DictStack(dicts))
+
+
 def gather_status():
     """
     >>> status = next(gather_status())
     >>> len(status)
-    3
+    4
     >>> 0 <= status['tuner'] < 4
     True
     """
+    device = random.choice(list(discover()))
     tuner = find_idle_tuner()
 
     for channel in 34, 35, 36:
-        set_channel(tuner, channel)
-        yield dict(DictStack([get_status(tuner), dict(tuner=tuner)]))
+        set_channel(tuner, channel, device_id=device)
+        yield _combine(
+            get_status(tuner, device_id=device),
+            dict(tuner=tuner, device=device),
+        )
     set_channel(tuner, None)
 
 

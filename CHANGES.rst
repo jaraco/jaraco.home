@@ -1,3 +1,8 @@
+v3.4.0
+======
+
+In HDHomeRun utility, now include device ID in the data.
+
 v3.3.1
 ======
 
