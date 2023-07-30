@@ -43,7 +43,7 @@ def parse_devices(res):
 
 def discover():
     cmd = [hdhomerun_config, 'discover']
-    return parse_devices(subprocess.check_output(cmd, text=True))
+    return parse_devices(subprocess.check_output(cmd, text=True, encoding='utf-8'))
 
 
 @retry(retries=5, cleanup=sleep_2, trap=Exception)
@@ -53,7 +53,7 @@ def get_status(tuner_id, device_id='FFFFFFFF'):
     {'ch': None, 'ss': 80}
     """
     cmd = [hdhomerun_config, device_id, 'get', f'/tuner{tuner_id}/status']
-    line = subprocess.check_output(cmd, text=True)
+    line = subprocess.check_output(cmd, text=True, encoding='utf-8')
     return parse_status(line)
 
 

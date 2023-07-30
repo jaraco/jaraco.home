@@ -20,7 +20,9 @@ def hdhomerun_config_mocked():
 
     hd.hdhomerun_config = 'hdhomerun_config'
     scripts = mockprocess.MockProc()
-    script = files('jaraco.home').joinpath('mock hdhomerun.py').read_text()
+    script = (
+        files('jaraco.home').joinpath('mock hdhomerun.py').read_text(encoding='utf-8')
+    )
     scripts.append('hdhomerun_config', returncode=0, script=script)
     with scripts:
         yield
