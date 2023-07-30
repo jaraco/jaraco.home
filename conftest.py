@@ -16,8 +16,7 @@ collect_ignore = [
 
 @pytest.fixture(scope='session', autouse=True)
 def hdhomerun_config_mocked():
-    # todo: should be jaraco.home.homerun, but for pytest bug
-    import home.hdhomerun as hd
+    import jaraco.home.hdhomerun as hd
 
     hd.hdhomerun_config = 'hdhomerun_config'
     scripts = mockprocess.MockProc()
