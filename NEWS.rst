@@ -1,3 +1,12 @@
+v3.5.1
+======
+
+Bugfixes
+--------
+
+- Removed workaround in tests.
+
+
 v3.5.0
 ======
 
