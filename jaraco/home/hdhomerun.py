@@ -77,11 +77,10 @@ def shuffled(items):
 
 
 def find_idle_tuner():
-    for id in shuffled(range(4)):
-        status = get_status(id)
-        if not status['ch']:
-            return id
-    raise RuntimeError("Could not find idle tuner")
+    try:
+        return next(id for id in shuffled(range(4)) if not get_status(id)['ch'])
+    except StopIteration:
+        raise RuntimeError("Could not find idle tuner")
 
 
 def _combine(*dicts):
