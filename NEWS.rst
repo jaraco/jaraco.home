@@ -1,3 +1,12 @@
+v3.6.0
+======
+
+Features
+--------
+
+- Add routine to quickly report spam calls to FTC.
+
+
 v3.5.1
 ======
 
