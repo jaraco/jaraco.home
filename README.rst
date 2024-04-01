@@ -16,3 +16,17 @@
 
 .. image:: https://img.shields.io/badge/skeleton-2024-informational
    :target: https://blog.jaraco.com/skeleton
+
+
+Report spam calls
+=================
+
+Jason uses this routine to report spam calls to the FTC:
+
+```
+py -m jaraco.develop.report-spam-call 202-555-1212
+```
+
+It uses `Splinter <https://splinter.readthedocs.io/en/stable/index.html>`_ to automate the process of reporting a spam call through the donotcall.gov website.
+
+It might be overly tuned to a specific class of calls, so feel free to propose extensions to the process to suit more needs.
