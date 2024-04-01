@@ -25,6 +25,10 @@ def read_contact_info():
 
 
 def clean_phone(number):
+    """
+    >>> clean_phone("+1 202 555 1212")
+    '2025551212'
+    """
     return re.sub(r'[-. ]', '', number.removeprefix('+1'))
 
 
