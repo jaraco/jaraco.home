@@ -8,8 +8,8 @@ import argparse
 import urllib.parse
 from pprint import pprint
 
-import requests
 import lxml.html
+import requests
 
 """
 API wiki: http://central.isaroach.com/wiki/index.php/Main_Page

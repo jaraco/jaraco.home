@@ -6,9 +6,9 @@ import types
 
 import autocommand
 import dateutil.parser
-import jaraco.collections
 from splinter import Browser
 
+import jaraco.collections
 
 DROPPED_CALL = '2'
 

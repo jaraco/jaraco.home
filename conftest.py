@@ -4,7 +4,6 @@ from importlib.resources import files
 import pytest
 from mockproc import mockprocess
 
-
 win_ignore = [
     'jaraco/home/hdhomerun.py',
 ] * (platform.system() == 'Windows')

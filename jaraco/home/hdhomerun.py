@@ -1,17 +1,18 @@
-import functools
 import contextlib
-import time
-import subprocess
-import sys
+import functools
 import pathlib
 import random
 import re
+import subprocess
+import sys
+import time
 from importlib.resources import files
 
 import keyring
+
+from jaraco.collections import DictStack
 from jaraco.functools import retry
 from jaraco.mongodb.helper import connect_db
-from jaraco.collections import DictStack
 
 
 def parse_field(item):
