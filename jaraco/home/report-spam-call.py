@@ -5,6 +5,7 @@ import re
 import types
 
 import autocommand
+import dateutil.parser
 import jaraco.collections
 from splinter import Browser
 
@@ -33,19 +34,24 @@ def clean_phone(number):
 
 
 @autocommand.autocommand(__name__)
-def report_spam_call(number, comment='', close=False):
+def report_spam_call(
+    number,
+    comment='',
+    close=False,
+    browser='firefox',
+    when: dateutil.parser.parse = datetime.datetime.now(),
+):
     """
     Report the common spam calls.
     """
     contact = read_contact_info()
-    browser = Browser('firefox')
+    browser = Browser(browser)
     browser.visit('https://www.donotcall.gov/report.html')
     browser.find_by_value('Continue').click()
     browser.fill('PhoneTextBox', clean_phone(contact.phone))
-    now = datetime.datetime.now()
-    browser.fill('DateOfCallTextBox', now.strftime('%m/%d/%Y'))
-    browser.select('TimeOfCallDropDownList', now.strftime('%H'))
-    browser.select('ddlMinutes', now.strftime('%M'))
+    browser.fill('DateOfCallTextBox', when.strftime('%m/%d/%Y'))
+    browser.select('TimeOfCallDropDownList', when.strftime('%H'))
+    browser.select('ddlMinutes', when.strftime('%M'))
     browser.choose('PrerecMsg', 'PrerecordMessageYESRadioButton')
     browser.choose('TextMsg', 'PhoneCallRadioButton')
     browser.select(
