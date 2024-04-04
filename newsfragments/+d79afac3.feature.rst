@@ -1,1 +1,0 @@
-Allow time and browser to be specified in spam call reporter.

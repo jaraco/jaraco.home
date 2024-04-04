@@ -1,3 +1,12 @@
+v3.7.0
+======
+
+Features
+--------
+
+- Allow time and browser to be specified in spam call reporter.
+
+
 v3.6.0
 ======
 
