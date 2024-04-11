@@ -1,28 +1,13 @@
 import datetime
-import json
-import os
 import re
-import types
 
 import autocommand
 import dateutil.parser
 from splinter import Browser
 
-import jaraco.collections
+from . import contact as contact_info
 
 DROPPED_CALL = '2'
-
-
-class IdentifierDict(jaraco.collections.KeyTransformingDict):
-    @staticmethod
-    def transform_key(key):
-        return key.replace(' ', '_')
-
-
-def read_contact_info():
-    return types.SimpleNamespace(
-        **IdentifierDict(json.loads(os.environ['CONTACT_INFO']))
-    )
 
 
 def clean_phone(number):
@@ -44,7 +29,7 @@ def report_spam_call(
     """
     Report the common spam calls.
     """
-    contact = read_contact_info()
+    contact = contact_info.load()
     browser = Browser(browser)
     browser.visit('https://www.donotcall.gov/report.html')
     browser.find_by_value('Continue').click()
