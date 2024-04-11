@@ -1,3 +1,12 @@
+v3.8.0
+======
+
+Features
+--------
+
+- Add script for checking the mouse trap(s).
+
+
 v3.7.0
 ======
 
