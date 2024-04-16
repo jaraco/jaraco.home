@@ -13,6 +13,6 @@ async def check_traps():
         api = vsk.VictorApi(client)
         traps = await api.get_traps()
         for trap in traps:
-            if trap.status:
-                print(trap.name, "has non-zero status")
+            if trap.trapstatistics.kills_present:
+                print(trap.name, "needs attention")
         return any(trap.status for trap in traps)
