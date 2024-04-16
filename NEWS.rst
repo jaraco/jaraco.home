@@ -1,3 +1,12 @@
+v3.8.1
+======
+
+Bugfixes
+--------
+
+- Fix check-traps to actually reflect status.
+
+
 v3.8.0
 ======
 
