@@ -1,3 +1,12 @@
+v3.9.0
+======
+
+Features
+--------
+
+- Restored Python 3.8 compatibility.
+
+
 v3.8.1
 ======
 
