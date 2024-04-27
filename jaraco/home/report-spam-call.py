@@ -6,6 +6,8 @@ import dateutil.parser
 from splinter import Browser
 
 from . import contact as contact_info
+from .compat.py38 import removeprefix
+
 
 DROPPED_CALL = '2'
 
@@ -15,7 +17,7 @@ def clean_phone(number):
     >>> clean_phone("+1 202 555 1212")
     '2025551212'
     """
-    return re.sub(r'[-. ]', '', number.removeprefix('+1'))
+    return re.sub(r'[-. ]', '', removeprefix(number, '+1'))
 
 
 @autocommand.autocommand(__name__)

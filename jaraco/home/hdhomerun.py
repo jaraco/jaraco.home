@@ -6,9 +6,10 @@ import re
 import subprocess
 import sys
 import time
-from importlib.resources import files
 
 import keyring
+
+from .compat.py38 import resources
 
 from jaraco.collections import DictStack
 from jaraco.functools import retry
@@ -112,7 +113,7 @@ def install():
     name = 'Gather HDHomeRun Stats.plist'
     agents = pathlib.Path('~/Library/LaunchAgents').expanduser()
     target = agents / name
-    tmpl_name = files(__package__) / name
+    tmpl_name = resources.files(__package__) / name
     tmpl = tmpl_name.read_text()
     logs = pathlib.Path(sys.executable).parent.parent / 'logs'
     source = tmpl.format(sys=sys, logs=logs)
