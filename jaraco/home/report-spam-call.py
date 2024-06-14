@@ -4,9 +4,9 @@ import re
 import autocommand
 import dateutil.parser
 from splinter import Browser
+from jaraco.compat.py38 import r_fix
 
 from . import contact as contact_info
-from .compat.py38 import removeprefix
 
 
 DROPPED_CALL = '2'
@@ -17,7 +17,7 @@ def clean_phone(number):
     >>> clean_phone("+1 202 555 1212")
     '2025551212'
     """
-    return re.sub(r'[-. ]', '', removeprefix(number, '+1'))
+    return re.sub(r'[-. ]', '', r_fix(number).removeprefix('+1'))
 
 
 @autocommand.autocommand(__name__)
