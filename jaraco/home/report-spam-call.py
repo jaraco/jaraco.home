@@ -16,8 +16,10 @@ def clean_phone(number):
     """
     >>> clean_phone("+1 202 555 1212")
     '2025551212'
+    >>> clean_phone("15055551212")
+    '5055551212'
     """
-    return re.sub(r'[-. ]', '', r_fix(number).removeprefix('+1'))
+    return re.sub(r'[-. ]|^[+]?1', '', r_fix(number).removeprefix('+1'))
 
 
 @autocommand.autocommand(__name__)
