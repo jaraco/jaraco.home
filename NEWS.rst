@@ -1,3 +1,12 @@
+v3.10.2
+=======
+
+Bugfixes
+--------
+
+- Prefer tempora.parse for its better timezone support.
+
+
 v3.10.1
 =======
 

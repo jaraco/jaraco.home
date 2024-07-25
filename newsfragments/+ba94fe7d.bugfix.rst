@@ -1,1 +1,0 @@
-Prefer tempora.parse for its better timezone support.
