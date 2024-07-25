@@ -1,3 +1,12 @@
+v3.10.1
+=======
+
+Bugfixes
+--------
+
+- Fix clean_phone when country code is included without plus prefix.
+
+
 v3.10.0
 =======
 
