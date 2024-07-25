@@ -27,6 +27,7 @@ def report_spam_call(
     close=False,
     browser='firefox',
     when: dateutil.parser.parse = datetime.datetime.now(),  # type: ignore
+    dialed=None,
 ):
     """
     Report the common spam calls.
@@ -35,7 +36,7 @@ def report_spam_call(
     browser = Browser(browser)
     browser.visit('https://www.donotcall.gov/report.html')
     browser.find_by_value('Continue').click()
-    browser.fill('PhoneTextBox', clean_phone(contact.phone))
+    browser.fill('PhoneTextBox', clean_phone(dialed or contact.phone))
     browser.fill('DateOfCallTextBox', when.strftime('%m/%d/%Y'))  # type: ignore
     browser.select('TimeOfCallDropDownList', when.strftime('%H'))  # type: ignore
     browser.select('ddlMinutes', when.strftime('%M'))  # type: ignore
