@@ -28,7 +28,6 @@ dependencies = [
 	"jaraco.collections",
 	"splinter[selenium]",
 	"autocommand",
-	"python-dateutil",
 	"victor-smart-kill",
 	'importlib_resources; python_version < "3.9"',
 	"jaraco.compat>=4.1",
