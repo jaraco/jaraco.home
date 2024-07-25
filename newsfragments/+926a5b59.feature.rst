@@ -1,1 +1,0 @@
-Allow the dialed number to be supplied.

@@ -1,3 +1,12 @@
+v3.10.0
+=======
+
+Features
+--------
+
+- Allow the dialed number to be supplied.
+
+
 v3.9.0
 ======
 
