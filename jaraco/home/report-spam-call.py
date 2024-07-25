@@ -2,7 +2,7 @@ import datetime
 import re
 
 import autocommand
-import dateutil.parser
+import tempora
 from splinter import Browser
 from jaraco.compat.py38 import r_fix
 
@@ -28,7 +28,7 @@ def report_spam_call(
     comment='',
     close=False,
     browser='firefox',
-    when: dateutil.parser.parse = datetime.datetime.now(),  # type: ignore
+    when: tempora.parse = datetime.datetime.now(),  # type: ignore
     dialed=None,
 ):
     """
