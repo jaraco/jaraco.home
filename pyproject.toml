@@ -80,11 +80,9 @@ type = [
 	"pytest-mypy",
 
 	# local
+	"lxml-stubs",
+	"jaraco.compat>=4.2.2", # py.typed; not necessary at runtime
 ]
 
 
 [tool.setuptools_scm]
-
-
-[tool.pytest-enabler.mypy]
-# Disabled due to jaraco/skeleton#143
