@@ -32,7 +32,7 @@ dependencies = [
 	'importlib_resources; python_version < "3.9"',
 	"jaraco.compat>=4.1",
 	"tempora>=5.7",
-	"rumps",
+	"rumps; sys_platform == 'darwin'",
 	"typer",
 ]
 dynamic = ["version"]
