@@ -4,10 +4,10 @@ import re
 import autocommand
 import tempora
 from splinter import Browser
+
 from jaraco.compat.py38 import r_fix
 
 from . import contact as contact_info
-
 
 DROPPED_CALL = '2'
 
@@ -28,7 +28,7 @@ def report_spam_call(
     comment='',
     close=False,
     browser='firefox',
-    when: tempora.parse = datetime.datetime.now(),  # type: ignore
+    when: tempora.parse = datetime.datetime.now(),
     dialed=None,
 ):
     """
@@ -39,9 +39,9 @@ def report_spam_call(
     browser.visit('https://www.donotcall.gov/report.html')
     browser.find_by_value('Continue').click()
     browser.fill('PhoneTextBox', clean_phone(dialed or contact.phone))
-    browser.fill('DateOfCallTextBox', when.strftime('%m/%d/%Y'))  # type: ignore
-    browser.select('TimeOfCallDropDownList', when.strftime('%H'))  # type: ignore
-    browser.select('ddlMinutes', when.strftime('%M'))  # type: ignore
+    browser.fill('DateOfCallTextBox', when.strftime('%m/%d/%Y'))
+    browser.select('TimeOfCallDropDownList', when.strftime('%H'))
+    browser.select('ddlMinutes', when.strftime('%M'))
     browser.choose('PrerecMsg', 'PrerecordMessageYESRadioButton')
     browser.choose('TextMsg', 'PhoneCallRadioButton')
     browser.select(
