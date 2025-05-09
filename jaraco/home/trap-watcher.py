@@ -1,16 +1,19 @@
+import sys
+from typing import TYPE_CHECKING
+
+if sys.platform != "darwin" and TYPE_CHECKING:
+    assert False  # https://github.com/python/mypy/issues/9025#issuecomment-1087270212
+
 import asyncio
 import pathlib
 import subprocess
-import sys
 
 import keyring
-import rumps
 import typer
 import victor_smart_kill as vsk
 
 from . import contact
 from .compat.py38 import resources
-
 
 app = typer.Typer()
 
@@ -63,4 +66,12 @@ def main(ctx: typer.Context, update: bool = False):
     TrapWatch()
 
 
-__name__ == '__main__' and app()
+if __name__ == '__main__':
+    # This check and import must be delayed as to not break pytest discovery
+    if sys.platform != "darwin":
+        print("This app is only available on MacOS.")
+        sys.exit(1)
+
+    import rumps
+
+    app()
