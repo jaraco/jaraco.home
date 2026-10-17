@@ -6,10 +6,9 @@ import re
 import subprocess
 import sys
 import time
+from importlib import resources
 
 import keyring
-
-from .compat.py38 import resources
 
 from jaraco.collections import DictStack
 from jaraco.functools import retry

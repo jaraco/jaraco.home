@@ -34,7 +34,6 @@ dependencies = [
 	"splinter[selenium]",
 	"autocommand",
 	"victor-smart-kill",
-	'importlib_resources; python_version < "3.9"',
 	"jaraco.compat>=4.1",
 	"tempora>=5.7",
 	"rumps",

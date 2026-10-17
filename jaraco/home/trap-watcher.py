@@ -2,6 +2,7 @@ import asyncio
 import pathlib
 import subprocess
 import sys
+from importlib import resources
 
 import keyring
 import rumps
@@ -9,7 +10,6 @@ import typer
 import victor_smart_kill as vsk
 
 from . import contact
-from .compat.py38 import resources
 
 
 app = typer.Typer()
