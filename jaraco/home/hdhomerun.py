@@ -141,6 +141,16 @@ def run():
 
 
 def update():
+    """
+    Upgrade jaraco.home in the current environment.
+
+    >>> monkeypatch = getfixture('monkeypatch')
+    >>> calls = []
+    >>> monkeypatch.setattr(subprocess, 'run', lambda cmd, **kw: calls.append(cmd))
+    >>> update()
+    >>> calls[0][-1]
+    'jaraco.home'
+    """
     cmd = [
         sys.executable,
         '-m',
