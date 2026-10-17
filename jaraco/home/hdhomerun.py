@@ -9,7 +9,6 @@ import time
 from importlib import resources
 
 import keyring
-
 from jaraco.collections import DictStack
 from jaraco.functools import retry
 from jaraco.mongodb.helper import connect_db
@@ -162,7 +161,7 @@ def update():
         'eager',
         'jaraco.home',
     ]
-    subprocess.run(cmd)
+    subprocess.run(cmd, check=False)
 
 
 def main():

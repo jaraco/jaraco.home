@@ -2,7 +2,6 @@ import json
 import os
 import types
 
-
 import jaraco.collections
 
 

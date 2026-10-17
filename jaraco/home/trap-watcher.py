@@ -11,7 +11,6 @@ import victor_smart_kill as vsk
 
 from . import contact
 
-
 app = typer.Typer()
 
 

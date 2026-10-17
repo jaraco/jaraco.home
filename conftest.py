@@ -14,13 +14,15 @@ collect_ignore = [
 
 @pytest.fixture(scope='session', autouse=True)
 def hdhomerun_config_mocked():
-    import jaraco.home.hdhomerun as hd
     from importlib import resources
+
+    import jaraco.home.hdhomerun as hd
 
     hd.hdhomerun_config = 'hdhomerun_config'
     scripts = mockprocess.MockProc()
     script = (
-        resources.files('jaraco.home')
+        resources
+        .files('jaraco.home')
         .joinpath('mock hdhomerun.py')
         .read_text(encoding='utf-8')
     )

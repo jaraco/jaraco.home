@@ -3,11 +3,10 @@ import re
 
 import autocommand
 import tempora
-from splinter import Browser
 from jaraco.compat.py38 import r_fix
+from splinter import Browser
 
 from . import contact as contact_info
-
 
 DROPPED_CALL = '2'
 
